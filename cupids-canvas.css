@@ -1,4 +1,4 @@
-/* variables & settings */
+/* variables and settings */
 :root {
   --cupid-pink: #ffafcc;
   --valentine-red: #ff4d6d;
@@ -31,12 +31,23 @@
   display: block;
 }
 
-/* default view: show #beginning if no page is targeted */
-body:not(:has(:target)) #beginning {
-  display: block;
+/* default view: show splash when no page targeted */
+#splash {
+  display: none;
+}
+body:not(:has(:target)) #splash {
+  display: flex;
+}
+body:not(:has(:target)) header,
+body:not(:has(:target)) main,
+body:not(:has(:target)) footer {
+  display: none;
+}
+body:has(:target) #splash {
+  display: none;
 }
 
-/* global styles & polish */
+/* global styles and polish */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -59,7 +70,7 @@ a:hover, button:hover, label:hover {
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆</text></svg>") 16 0, pointer;
 }
 
-/* header & nav */
+/* header and nav */
 header {
   position: sticky;
   top: 0;
@@ -100,7 +111,7 @@ header {
   color: var(--valentine-red);
 }
 
-/* hero section (glassmorphism) */
+/* hero section glassmorphism */
 .hero {
   position: relative;
   overflow: hidden;
@@ -181,7 +192,7 @@ h1 {
   margin-top: 0.5rem;
 }
 
-/* cards & grid */
+/* cards and grid */
 .content-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -217,7 +228,7 @@ h1 {
   outline-offset: 3px;
 }
 
-/* extra mile: 3d flip card */
+/* 3d flip card */
 .flip-container {
   perspective: 1000px;
   width: 300px;
@@ -225,7 +236,7 @@ h1 {
   margin: 2rem auto;
 }
 
-/* visually hide checkbox but keep it focusable for accessibility */
+/* visually hide checkbox, keep focusable for accessibility */
 .state-toggle {
   position: absolute;
   opacity: 0;
@@ -287,7 +298,7 @@ h1 {
   font-size: 0.9rem;
 }
 
-/* extra mile: pure css envelope */
+/* pure css envelope */
 .css-envelope {
   position: relative;
   width: 80px;
@@ -341,7 +352,7 @@ h1 {
 .flip-card:hover .envelope-letter { transform: translateY(-15px); }
 .flip-card:hover .css-envelope { transform: scale(1.1); }
 
-/* extra mile: pure css clouds */
+/* pure css clouds */
 .cloud {
   background: rgba(255, 255, 255, 0.6);
   width: 100px;
@@ -386,7 +397,7 @@ h1 {
   animation-delay: 10s;
 }
 
-/* buttons & footer */
+/* buttons and footer */
 .page-nav {
   text-align: center;
   margin: 3rem 0;
@@ -427,7 +438,7 @@ footer {
   margin-top: auto;
 }
 
-/* extra mile: romantic heart row */
+/* romantic heart row */
 .heart-row {
   display: flex;
   justify-content: center;
@@ -474,8 +485,341 @@ footer {
   100% { transform: translateY(-80px); opacity: 0; }
 }
 
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
 .slide-in-text {
   animation: slideIn 1s ease-out forwards;
+}
+
+/* cupid's valentine town square splash screen */
+.town-square-splash {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.splash-sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    #ffd6e8 0%,
+    #ffafcc 25%,
+    #ffb3d9 50%,
+    #ff8fab 75%,
+    #f8c8dc 100%
+  );
+  z-index: 0;
+}
+
+/* splash clouds weather */
+.splash-cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50px;
+  z-index: 1;
+}
+.splash-cloud::before, .splash-cloud::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+.splash-cloud::before { width: 35px; height: 35px; top: -15px; left: 12px; }
+.splash-cloud::after { width: 25px; height: 25px; top: -8px; left: 35px; }
+.splash-cloud-1 {
+  width: 80px; height: 30px;
+  top: 15%; left: -100px;
+  animation: splashDrift 28s linear infinite;
+}
+.splash-cloud-2 {
+  width: 60px; height: 25px;
+  top: 40%; left: -80px;
+  animation: splashDrift 35s linear infinite 5s;
+  opacity: 0.8;
+}
+.splash-cloud-3 {
+  width: 90px; height: 35px;
+  top: 8%; left: -120px;
+  animation: splashDrift 40s linear infinite 12s;
+  opacity: 0.6;
+}
+@keyframes splashDrift {
+  from { left: -150px; transform: translateY(0); }
+  to { left: 100vw; transform: translateY(5px); }
+}
+
+/* cupid flying overhead */
+.cupid {
+  position: absolute;
+  top: 12%;
+  left: -80px;
+  font-size: 3rem;
+  z-index: 10;
+  animation: cupidFly 18s linear infinite;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+}
+@keyframes cupidFly {
+  0% { left: -80px; top: 12%; transform: scale(1) rotate(-5deg); }
+  25% { top: 8%; transform: scale(1.1) rotate(5deg); }
+  50% { top: 15%; transform: scale(1) rotate(-5deg); }
+  75% { top: 10%; transform: scale(1.1) rotate(5deg); }
+  100% { left: 100vw; top: 12%; transform: scale(1) rotate(-5deg); }
+}
+
+/* hearts from cupid */
+.cupid-heart {
+  position: absolute;
+  font-size: 1.2rem;
+  color: var(--valentine-red);
+  z-index: 9;
+  opacity: 0.9;
+  pointer-events: none;
+}
+.cupid-heart-1 { top: 15%; left: -60px; animation: cupidHeartFall 8s linear infinite; }
+.cupid-heart-2 { top: 18%; left: -60px; animation: cupidHeartFall 9s linear infinite 2s; }
+.cupid-heart-3 { top: 12%; left: -60px; animation: cupidHeartFall 7s linear infinite 4s; }
+@keyframes cupidHeartFall {
+  0% { left: -60px; transform: translateY(0) scale(1); opacity: 0.9; }
+  100% { left: 100vw; transform: translateY(50px) scale(0.8); opacity: 0.5; }
+}
+
+/* flying birds */
+.flying-bird {
+  position: absolute;
+  font-size: 1.5rem;
+  z-index: 5;
+  opacity: 0.85;
+}
+.flying-bird-1 { top: 20%; left: -50px; animation: birdFly 15s linear infinite; }
+.flying-bird-2 { top: 35%; left: -50px; animation: birdFly 20s linear infinite 3s; }
+.flying-bird-3 { top: 25%; left: -50px; animation: birdFly 18s linear infinite 6s; }
+@keyframes birdFly {
+  0% { left: -50px; transform: translateY(0) scaleX(1); }
+  50% { transform: translateY(-20px) scaleX(1); }
+  100% { left: 100vw; transform: translateY(0) scaleX(1); }
+}
+
+/* balloons floating upward */
+.balloon {
+  position: absolute;
+  font-size: 1.8rem;
+  z-index: 4;
+  bottom: -30px;
+  animation: balloonRise 12s ease-in infinite;
+}
+.balloon-1 { left: 15%; animation-delay: 0s; }
+.balloon-2 { left: 35%; animation-delay: 2s; }
+.balloon-3 { left: 55%; animation-delay: 4s; }
+.balloon-4 { left: 75%; animation-delay: 1s; }
+@keyframes balloonRise {
+  0% { bottom: -30px; opacity: 0.8; transform: translateX(0) scale(1); }
+  100% { bottom: 100vh; opacity: 0.4; transform: translateX(20px) scale(0.9); }
+}
+
+/* heart confetti drifting */
+.confetti-heart {
+  position: absolute;
+  font-size: 1rem;
+  color: var(--valentine-red);
+  z-index: 3;
+  opacity: 0.7;
+}
+.confetti-1 { top: 30%; left: 10%; animation: confettiDrift 14s ease-in-out infinite; }
+.confetti-2 { top: 50%; left: 25%; animation: confettiDrift 16s ease-in-out infinite 2s; }
+.confetti-3 { top: 40%; left: 60%; animation: confettiDrift 12s ease-in-out infinite 4s; }
+.confetti-4 { top: 25%; left: 80%; animation: confettiDrift 18s ease-in-out infinite 1s; }
+.confetti-5 { top: 55%; left: 45%; animation: confettiDrift 15s ease-in-out infinite 3s; }
+@keyframes confettiDrift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(15px, -10px) rotate(15deg); }
+  50% { transform: translate(-10px, 5px) rotate(-10deg); }
+  75% { transform: translate(5px, -5px) rotate(5deg); }
+}
+
+/* bench scene couple under tree */
+.bench-scene {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+}
+.tree {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 80px;
+  background: linear-gradient(90deg, #5d4037, #6d4c41);
+  border-radius: 5px;
+  clip-path: polygon(10% 100%, 90% 100%, 85% 0%, 15% 0%);
+}
+.tree::before {
+  content: '';
+  position: absolute;
+  bottom: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, #2e7d32 40%, #1b5e20 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 15px rgba(46, 125, 50, 0.3);
+}
+.bench {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 12px;
+  background: linear-gradient(180deg, #8d6e63, #5d4037);
+  border-radius: 3px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.couple-on-bench {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+.couple-on-bench .person {
+  font-size: 2rem;
+  filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
+}
+.person-left { animation: coupleSway 4s ease-in-out infinite; }
+.person-right { animation: coupleSway 4s ease-in-out infinite 0.5s; }
+@keyframes coupleSway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+/* pedestrians human activity */
+.pedestrian {
+  position: absolute;
+  bottom: 20%;
+  display: flex;
+  align-items: center;
+  z-index: 7;
+}
+.pedestrian-figure { font-size: 2rem; }
+.pedestrian-item { font-size: 1.2rem; margin-left: 4px; }
+.pedestrian-1 {
+  left: -80px;
+  animation: pedestrianWalk 20s linear infinite;
+}
+.pedestrian-2 {
+  left: -80px;
+  animation: pedestrianWalk 22s linear infinite 8s;
+  bottom: 22%;
+}
+@keyframes pedestrianWalk {
+  0% { left: -80px; transform: scaleX(1); }
+  100% { left: 100vw; transform: scaleX(1); }
+}
+
+/* car vehicle in motion */
+.car {
+  position: absolute;
+  bottom: 15%;
+  left: -100px;
+  font-size: 2.5rem;
+  z-index: 8;
+  animation: carDrive 25s linear infinite 5s;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+}
+@keyframes carDrive {
+  0% { left: -100px; }
+  100% { left: 100vw; }
+}
+
+/* lamp post with bird */
+.lamp-post {
+  position: absolute;
+  bottom: 15%;
+  right: 15%;
+  z-index: 6;
+}
+.lamp-pole {
+  width: 8px;
+  height: 80px;
+  background: linear-gradient(90deg, #455a64, #546e7a);
+  border-radius: 4px;
+  margin: 0 auto;
+}
+.lamp-top {
+  width: 30px;
+  height: 20px;
+  background: linear-gradient(180deg, #ffeb3b, #ffc107);
+  border-radius: 5px;
+  margin: -2px auto 0;
+  box-shadow: 0 0 15px rgba(255, 235, 59, 0.6);
+  animation: lampGlow 2s ease-in-out infinite alternate;
+}
+@keyframes lampGlow {
+  from { box-shadow: 0 0 10px rgba(255, 235, 59, 0.5); }
+  to { box-shadow: 0 0 20px rgba(255, 235, 59, 0.8); }
+}
+.lamp-bird {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  animation: birdHop 3s ease-in-out infinite;
+}
+@keyframes birdHop {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* splash content overlay */
+.splash-content {
+  position: relative;
+  z-index: 100;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(255, 77, 109, 0.25);
+  margin-top: 2rem;
+}
+.splash-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: var(--valentine-red);
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 0 white;
+}
+.splash-subtitle {
+  font-size: 1rem;
+  color: var(--chocolate);
+  margin-bottom: 1.5rem;
+}
+.splash-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: linear-gradient(45deg, var(--love-purple), var(--valentine-red));
+  color: white !important;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.splash-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 77, 109, 0.4);
 }
 
 /* responsiveness */
@@ -484,4 +828,8 @@ footer {
   .nav-links { margin-top: 1rem; gap: 1rem; font-size: 0.9rem; }
   h1 { font-size: 2.5rem; }
   .hero { min-height: 300px; }
+  .splash-title { font-size: 2rem; }
+  .splash-content { padding: 1.5rem; margin: 1rem; }
+  .cupid { font-size: 2rem; }
+  .bench-scene { transform: translateX(-50%) scale(0.8); }
 }
