@@ -1,0 +1,152 @@
+/* Color Variables */
+:root {
+  --pink: #FFAFCC;
+  --red: #FF4D6D;
+  --purple: #C77DFF;
+  --vanilla: #FFFAF0;
+}
+
+/* Reset */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--vanilla);
+  text-align: center;
+}
+
+/* Header */
+header {
+  background: var(--pink);
+  padding: 20px;
+}
+
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 40px;
+  margin: 0;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--red);
+}
+
+/* Pages */
+.page {
+  display: none;
+  padding: 50px 20px;
+  min-height: 60vh;
+}
+
+.page:target {
+  display: block;
+}
+
+/* Default page */
+#page1 {
+  display: block;
+}
+
+/* Heart Animation */
+.heart {
+  width: 50px;
+  height: 50px;
+  background: var(--red);
+  margin: 20px auto;
+  transform: rotate(45deg);
+  animation: beat 1s infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  background: var(--red);
+  position: absolute;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -25px;
+  left: 0;
+}
+
+.heart::after {
+  left: -25px;
+  top: 0;
+}
+
+@keyframes beat {
+  0% { transform: scale(1) rotate(45deg); }
+  50% { transform: scale(1.2) rotate(45deg); }
+  100% { transform: scale(1) rotate(45deg); }
+}
+
+/* Car animation */
+.car {
+  width: 80px;
+  height: 30px;
+  background: var(--purple);
+  margin: 30px auto;
+  animation: drive 5s linear infinite;
+}
+
+@keyframes drive {
+  0% { transform: translateX(-200px); }
+  100% { transform: translateX(200px); }
+}
+
+/* Cupid */
+.cupid {
+  width: 60px;
+  height: 30px;
+  background: var(--pink);
+  margin: 20px auto;
+  border-radius: 50%;
+  animation: fly 6s linear infinite;
+}
+
+@keyframes fly {
+  0% { transform: translateX(-200px); }
+  100% { transform: translateX(200px); }
+}
+
+/* Flower */
+.flower {
+  width: 40px;
+  height: 40px;
+  background: var(--purple);
+  border-radius: 50%;
+  margin: 20px auto;
+}
+
+/* Moon */
+.moon {
+  width: 60px;
+  height: 60px;
+  background: lightyellow;
+  border-radius: 50%;
+  margin: 20px auto;
+}
+
+/* Rings */
+.rings {
+  width: 60px;
+  height: 60px;
+  border: 5px solid gold;
+  border-radius: 50%;
+  margin: 20px auto;
+}
+
+/* Footer */
+footer {
+  background: var(--pink);
+  padding: 15px;
+}
