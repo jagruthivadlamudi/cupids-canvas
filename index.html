@@ -25,6 +25,10 @@
             <div class="hero">
                 <div class="bg-layer">
                     <img src="assets/images/heart-border.png" alt="Decorative Hearts" class="floating-bg">
+                    
+                    <div class="cloud cloud-1"></div>
+                    <div class="cloud cloud-2"></div>
+                    <div class="cloud cloud-3"></div>
                 </div>
 
                 <div class="hero-content">
@@ -58,14 +62,20 @@
             </div>
 
             <div class="flip-container">
-                <input type="checkbox" id="flip-toggle" class="state-toggle">
+                <input type="checkbox" id="flip-toggle" class="state-toggle" aria-label="Open secret love letter">
                 
-                <label for="flip-toggle" class="flip-card">
+                <label for="flip-toggle" class="flip-card" role="button" aria-describedby="flip-help-text">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <h3>The Secret Love Letter</h3>
-                            <p>Tap to reveal the message</p>
-                            <span class="envelope-icon">💌</span>
+                            
+                            <div class="css-envelope">
+                                <div class="envelope-flap"></div>
+                                <div class="envelope-pocket"></div>
+                                <div class="envelope-letter"></div>
+                            </div>
+                            
+                            <p id="flip-help-text" class="flip-help-text">Tap or press Enter to open</p>
                         </div>
                         
                         <div class="flip-card-back">
@@ -75,6 +85,21 @@
                         </div>
                     </div>
                 </label>
+            </div>
+
+            <div class="content-grid">
+                <article class="card glass-card">
+                    <h3>Love Blooms</h3>
+                    <p>Every petal in Cupid's Garden holds a whispered promise of forever.</p>
+                </article>
+                <article class="card glass-card">
+                    <h3>Whispering Petals</h3>
+                    <p>As the breeze passes, the roses lean closer, sharing secrets of the heart.</p>
+                </article>
+                <article class="card glass-card">
+                    <h3>Guiding Doves</h3>
+                    <p>Snow-white doves trace heart-shaped paths in the sky, guiding soulmates together.</p>
+                </article>
             </div>
 
             <div class="page-nav">
@@ -87,6 +112,8 @@
             <div class="hero">
                  <div class="bg-layer">
                     <img src="assets/images/confetti.png" alt="Falling Confetti" class="floating-bg confetti-bg">
+                    <span class="floating-heart floating-heart-left" aria-hidden="true">❤</span>
+                    <span class="floating-heart floating-heart-right" aria-hidden="true">❤</span>
                 </div>
 
                 <div class="hero-content">
@@ -100,6 +127,23 @@
                     “Love is not about how many days, months, or years you have been together. Love is about how much you love each other every single day.”
                 </blockquote>
             </div>
+            
+            <div class="content-grid">
+                <article class="card glass-card">
+                    <h3>Everlasting Vows</h3>
+                    <p>Two hearts beat in harmony, promising to choose each other again and again.</p>
+                </article>
+                <article class="card glass-card">
+                    <h3>Shared Memories</h3>
+                    <p>Every laugh, every tear, every quiet moment weaves a story only they can tell.</p>
+                </article>
+            </div>
+
+            <div class="heart-row" aria-hidden="true">
+                <span class="heart-icon">❤</span>
+                <span class="heart-icon">❤</span>
+                <span class="heart-icon">❤</span>
+            </div>
 
             <div class="page-nav">
                 <a href="#beginning" class="btn">Restart Journey</a>
@@ -108,7 +152,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 Cupid's Canvas | Built with HTML5 & CSS3</p>
+        <p>&copy; 2026 Cupid's Canvas | Built with HTML5 &amp; CSS3 • Two hearts, one endless story.</p>
     </footer>
 
 </body>
